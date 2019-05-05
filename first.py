@@ -38,8 +38,27 @@ def minmax():
                 print('bad data')
     print(largest, smallest)
 
+#function for accepting strings, and the letter to be counted in the given string
+def lcounter(letter, word):
+    count = 0
+    for l in word:
+        if l == letter:
+            count = count + 1
+    return(count)
+
+
+
+
 #if __name__ == '__main__':
 #    average()
 
+#if __name__ == '__main__':
+#    minmax()
+
+
 if __name__ == '__main__':
-    minmax()
+    letter = input('Give me a letter to count: ')
+    word = input('Give me a word so I may count its letters: ')
+    count = lcounter(letter, word)
+    print(count)
+
