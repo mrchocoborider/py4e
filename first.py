@@ -46,19 +46,61 @@ def lcounter(letter, word):
             count = count + 1
     return(count)
 
+def shout(fname):
+    try:
+        fhand = open(fname)
+    except:
+        print('File could not be opened')
+        exit()
+    for f in fhand:
+        line = f.upper()
+        print(line)
 
-
-
-#if __name__ == '__main__':
-#    average()
-
-#if __name__ == '__main__':
-#    minmax()
+def spamconf(fname):
+    try:
+        fhand = open(fname)
+    except:
+        print('File could not be opened')
+        exit()
+    count = 0
+    total = 0
+    for f in fhand:
+        line = f.rstrip()
+        if not line.startswith('X-DSPAM-Confidence:'):
+            continue
+        count += 1
+        sppos = line.find(' ')
+        conf = line[sppos+1: ]
+        #print(conf)
+        conf = float(conf)
+        total = total + conf
+        av = total/count
+    print(count, total, av)
 
 
 if __name__ == '__main__':
-    letter = input('Give me a letter to count: ')
-    word = input('Give me a word so I may count its letters: ')
-    count = lcounter(letter, word)
-    print(count)
+    while True:
+        arg = input('Select your function, or type done to exit: ')
+        if arg.lower() == 'average':
+            average()
+        elif arg.lower() == 'done':
+            break
+        elif arg.lower() == 'minmax':
+            minmax()
+        elif arg.lower() == 'counter': 
+            letter = input('Give me a letter to count: ')
+            word = input('Give me a word so I may count its letters: ')
+            count = lcounter(letter, word)
+            print(count)
+        elif arg.lower() == 'shout':
+            fname = input('Gimme a filename: ')
+            shout(fname)
+        elif arg.lower() == 'spamconf':
+            fname = input('Gimme a filename: ')
+            if fname == 'na na boo boo':
+                print("NA NA BOO BOO TO YOU - You've been punk'd")
+            else:
+                spamconf(fname)
+        else:
+            print('I do not recognize that command: ')
 
