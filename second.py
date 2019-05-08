@@ -20,6 +20,19 @@ def romeo(fname):
     t.sort()
     print(t)
                 
+def frmfinder(fname):
+    fhand = open(fname)
+    count = 0
+    for line in fhand:
+        words = line.split()
+        if len(words) == 0: continue
+        if words[0] != 'From': continue
+        print(words[1])
+        count += 1
+    print('There were {0} line in the file with From as the first word'.format(count))
+
+
+
 
 
 
@@ -42,6 +55,9 @@ if __name__ == '__main__':
         elif arg.lower() == 'romeo':
             fname = 'romeo.txt'
             romeo(fname)
+        elif arg.lower() == 'frmfinder':
+            fname = 'mbox-short.txt'
+            frmfinder(fname)
         #elif arg.lower() == 'shout':
         #elif arg.lower() == 'spamconf':
         else:
