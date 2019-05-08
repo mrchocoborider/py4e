@@ -18,10 +18,12 @@ def average():
     print(total, count, avg)
 
     
-
+#rewritten in chapter 8, lists exercises
 def minmax():
-    largest = None
-    smallest = None
+    #largest = None
+    #smallest = None
+    mm = []
+
     while True:
         x = input('Enter a number or enter done: ')
         if x == 'done':
@@ -29,13 +31,16 @@ def minmax():
         else:
             try:
                 x = int(x)
-                if largest == None or x > largest:
-                    largest = x
-                if smallest == None or x < smallest:
-                    smallest = x
+                #if largest == None or x > largest:
+                #    largest = x
+                #if smallest == None or x < smallest:
+                #    smallest = x
+                mm.append(x)
 
             except ValueError:
                 print('bad data')
+    largest = max(mm)
+    smallest = min(mm)
     print(largest, smallest)
 
 #function for accepting strings, and the letter to be counted in the given string
