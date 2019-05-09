@@ -31,9 +31,49 @@ def frmfinder(fname):
         count += 1
     print('There were {0} line in the file with From as the first word'.format(count))
 
+#count days of the week on lines that start with from
+def frmfinder2(fname):
+    fhand = open(fname)
+    dowd = {}
+    for line in fhand:
+        words = line.split()
+        if len(words) == 0: continue
+        if words[0] != 'From': continue
+        dowd[words[2]] = dowd.get(words[2], 0) + 1
+    print(dowd)
 
+def maillog(fname):
+    fhand = open(fname)
+    md = {}
+    for line in fhand:
+        words = line.split()
+        if len(words) == 0: continue
+        if words[0] != 'From': continue
+        md[words[1]] = md.get(words[1], 0) + 1
+    print(md)
 
+    #Exercise 4 chapter 9
+    largest = 0
+    mail = ''
+    for x in md:
+        if md[x] > largest:
+            largest = md[x]
+            mail = x
+    print(mail, largest)
 
+#Exercise 5
+def schoolcount(fname):
+    fhand = open(fname)
+    sc = {}
+    for line in fhand:
+        words = line.split()
+        if len(words) == 0: continue
+        if words[0] != 'From': continue
+        split = words[1].find('@') + 1
+        #get everything after the @
+        s = words[1][split:]
+        sc[s] = sc.get(s, 0) + 1
+    print(sc)
 
 
 if __name__ == '__main__':
@@ -58,7 +98,16 @@ if __name__ == '__main__':
         elif arg.lower() == 'frmfinder':
             fname = 'mbox-short.txt'
             frmfinder(fname)
-        #elif arg.lower() == 'shout':
+        elif arg.lower() == 'frmfinder2':
+            fname = 'mbox-short.txt'
+            frmfinder2(fname)
+        elif arg.lower() == 'maillog':
+            fname = 'mbox-short.txt'
+            maillog(fname)
+        elif arg.lower() == 'schoolcount':
+            fname = 'mbox-short.txt'
+            schoolcount(fname)
+
         #elif arg.lower() == 'spamconf':
         else:
             print('I do not recognize that command: ')
